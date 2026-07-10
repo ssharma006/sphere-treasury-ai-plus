@@ -62,17 +62,43 @@ export default function TreasuryDashboard() {
         color: darkMode ? "#ffffff" : "#000000",
      }}
     >
-      <h2>💰 Treasury Dashboard</h2>
       <div
-      style={{
-       background: "#1e293b",
-       padding: "15px",
-       borderRadius: "10px",
-       marginTop: "20px",
-       marginBottom: "20px",
-       }}
+         style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "20px",
+  }}
 >
-       <h3>🤖 AI Recommendation</h3>
+   <h2>💰 Treasury Dashboard</h2>
+
+    <button
+    onClick={() => setDarkMode(!darkMode)}
+    style={{
+      padding: "8px 15px",
+      border: "none",
+      borderRadius: "8px",
+      cursor: "pointer",
+      background: darkMode ? "#facc15" : "#1e293b",
+      color: darkMode ? "#000" : "#fff",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+      transition: "0.3s",
+      borderRadius: "14px",
+    }}
+  >
+    {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
+  </button>
+  </div>
+<div
+  style={{
+    background: darkMode ? "#1e293b" : "#f3f4f6",
+    padding: "15px",
+    borderRadius: "10px",
+    marginTop: "20px",
+    marginBottom: "20px",
+  }}
+>
+  <h3>🤖 AI Recommendation</h3>
 
        <p>
        {budgets.reduce((t, b) => t + b.amount, 0) > 1000
@@ -128,13 +154,18 @@ export default function TreasuryDashboard() {
   }}
 >
   <div
-    style={{
-      background: "#1e293b",
-      padding: "15px",
-      borderRadius: "10px",
-      minWidth: "180px",
-    }}
-  >
+  style={{
+    background: darkMode ? "#1e293b" : "#f3f4f6",
+    padding: "18px",
+    borderRadius: "14px",
+    minWidth: "180px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    transition: "0.3s",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    transition: "0.3s",
+    borderRadius: "14px",
+  }}
+>
     <h4>💰 Total Treasury</h4>
     <p>
       {budgets.reduce((t, b) => t + b.amount, 0)} TEST
@@ -142,10 +173,13 @@ export default function TreasuryDashboard() {
   </div>
             <div
   style={{
-    background: "#1e293b",
+    background: darkMode ? "#1e293b" : "#f3f4f6",
     padding: "15px",
     borderRadius: "10px",
     minWidth: "180px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    transition: "0.3s",
+    borderRadius: "14px",
   }}
 >
   <h4>🏆 Largest Budget</h4>
@@ -156,10 +190,13 @@ export default function TreasuryDashboard() {
 
 <div
   style={{
-    background: "#1e293b",
+    background: darkMode ? "#1e293b" : "#f3f4f6",
     padding: "15px",
     borderRadius: "10px",
     minWidth: "180px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    transition: "0.3s",
+    borderRadius: "14px",
   }}
 >
   <h4>📉 Smallest Budget</h4>
@@ -170,7 +207,7 @@ export default function TreasuryDashboard() {
 
 <div
   style={{
-    background: "#1e293b",
+    background: darkMode ? "#1e293b" : "#f3f4f6",
     padding: "15px",
     borderRadius: "10px",
     minWidth: "180px",
@@ -185,10 +222,13 @@ export default function TreasuryDashboard() {
 </div>
   <div
     style={{
-      background: "#1e293b",
+      background: darkMode ? "#1e293b" : "#f3f4f6",
       padding: "15px",
       borderRadius: "10px",
       minWidth: "180px",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+      transition: "0.3s",
+      borderRadius: "14px",
     }}
   >
     <h4>📦 Total Budgets</h4>
@@ -226,10 +266,13 @@ export default function TreasuryDashboard() {
   style={{
     width: "100%",
     height: 300,
-    background: "#1e293b",
+    background: darkMode ? "#1e293b" : "#f3f4f6",
     borderRadius: "10px",
     padding: "15px",
     marginBottom: "20px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    transition: "0.3s",
+    borderRadius: "14px",
   }}
 >
   <h3>📊 Budget Overview</h3>
@@ -311,6 +354,9 @@ export default function TreasuryDashboard() {
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    transition: "0.3s",
+    borderRadius: "14px",
   }}
 >
   💾 Save Changes
@@ -467,20 +513,22 @@ export default function TreasuryDashboard() {
   >
     ➕ Add Budget
   </button>
-
-  <button
-    onClick={exportCSV}
-    style={{
-      padding: "10px 20px",
-      background: "#2563eb",
-      color: "white",
-      border: "none",
-      borderRadius: "8px",
-      cursor: "pointer",
-    }}
-  >
-    📄 Export CSV
-  </button>
+    <button
+  onClick={exportCSV}
+  style={{
+    padding: "10px 20px",
+    background: "#2563eb",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+  }}
+>
+  📄 Export Treasury CSV
+</button>
+ 
 </div>
 </div>
   );
