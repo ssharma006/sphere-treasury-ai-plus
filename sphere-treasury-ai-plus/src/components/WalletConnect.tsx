@@ -10,10 +10,7 @@ export default function WalletConnect() {
 
     if (result) {
       setConnected(true);
-
-      setAddress(
-        (result.sphere as any)._identity.directAddress
-      );
+      setAddress((result.sphere as any)._identity.directAddress);
     }
   }
 
@@ -21,15 +18,29 @@ export default function WalletConnect() {
     <div
       style={{
         marginTop: "30px",
+        marginBottom: "25px",
         padding: "20px",
-        border: "1px solid #444",
-        borderRadius: "10px",
+        background: "#0f766e",
+        border: "1px solid #14b8a6",
+        borderRadius: "12px",
+        color: "#ffffff",
+        boxShadow: "0 4px 12px rgba(20,184,166,0.25)",
       }}
     >
-      <h2>Sphere Wallet</h2>
+      <h2
+        style={{
+          color: "#14F195",
+          marginTop: 0,
+          marginBottom: "15px",
+          fontSize: "28px",
+        }}
+      >
+        🔗 Sphere Wallet
+      </h2>
 
       <p>
-        Wallet Status: {connected ? "✅ Connected" : "❌ Not Connected"}
+        <strong>Wallet Status:</strong>{" "}
+        {connected ? "✅ Connected" : "❌ Not Connected"}
       </p>
 
       {connected && (
@@ -41,9 +52,11 @@ export default function WalletConnect() {
           <p
             style={{
               wordBreak: "break-all",
-              background: "#222",
+              background: "#134e4a",
+              color: "#ffffff",
               padding: "10px",
-              borderRadius: "6px",
+              borderRadius: "8px",
+              border: "1px solid #14b8a6",
             }}
           >
             {address}
@@ -51,19 +64,23 @@ export default function WalletConnect() {
         </>
       )}
 
-      <button
-        onClick={connectWallet}
-        style={{
-          padding: "12px 20px",
-          background: "#ff8a00",
-          color: "white",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-        }}
-      >
-        Connect Wallet
-      </button>
+      {!connected && (
+        <button
+          onClick={connectWallet}
+          style={{
+            marginTop: "15px",
+            padding: "12px 22px",
+            background: "#14F195",
+            color: "#000",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontWeight: "bold",
+          }}
+        >
+          Connect Sphere Wallet
+        </button>
+      )}
     </div>
   );
 }

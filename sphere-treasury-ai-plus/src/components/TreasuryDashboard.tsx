@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { sphere } from "../sphere";
 import {
   BarChart,
   Bar,
@@ -9,11 +10,9 @@ import {
 } from "recharts";
 
 export default function TreasuryDashboard() {
+  const sdkStatus = sphere ? "🟢 Connected" : "🔴 Disconnected";
   const [budgets, setBudgets] = useState([
-    {
-      name: "Marketing",
-      amount: 100,
-    },
+    
   ]);
   const [budgetName, setBudgetName] = useState("");
   const [budgetAmount, setBudgetAmount] = useState(0);
@@ -53,9 +52,10 @@ export default function TreasuryDashboard() {
 };
   return (
     <div
-      style={{
-        marginTop: "30px",
-        padding: "20px",
+        style={{
+        maxWidth: "1280px",
+        margin: "30px auto",
+        padding: "24px",
         border: "1px solid #444",
         borderRadius: "10px",
         background: darkMode ? "#0f172a" : "#ffffff",
@@ -70,8 +70,68 @@ export default function TreasuryDashboard() {
           marginBottom: "20px",
   }}
 >
-   <h2>💰 Treasury Dashboard</h2>
+  <div>
+  <h2
+  style={{
+    margin: 0,
+    fontSize: "34px",
+    fontWeight: "700",
+    color: "#14F195",
+    marginBottom: "8px",
+  }}
+>
+  💰 Sphere Treasury AI+
+</h2>
+  <p
+    style={{
+      marginTop: "5px",
+      color: darkMode ? "#94a3b8" : "#475569",
+      fontSize: "14px",
+    }}
+  >
+    AI-powered Treasury Management built on Sphere SDK
+  </p>
+</div>
+       <div
+  style={{
+    background: "#0f766e",
+    padding: "15px",
+    borderRadius: "10px",
+    marginBottom: "20px",
+    border: "1px solid #14b8a6",
+  }}
+><h3
+  style={{
+    color: "#14F195",
+    fontSize: "22px",
+    marginBottom: "10px",
+  }}
+>
+  🔗 Sphere Wallet
+</h3>
+<p>
+  <strong>Status:</strong> {sdkStatus}
+</p>
 
+<p>
+  <strong>Network:</strong> Sphere Testnet v2
+</p>
+
+<p>
+  <strong>SDK:</strong> @unicitylabs/sphere-sdk
+</p>
+
+<hr style={{ margin: "12px 0", opacity: 0.3 }} />
+
+<p>🪪 Identity : ✅ Initialized</p>
+
+<p>👛 Wallet : ✅ Connected</p>
+
+<p>🤝 Settlement : ✅ Enabled</p>
+
+<p>🔐 Treasury : ✅ Managed by Sphere SDK</p>
+  
+</div>
     <button
     onClick={() => setDarkMode(!darkMode)}
     style={{
@@ -98,9 +158,33 @@ export default function TreasuryDashboard() {
     marginBottom: "20px",
   }}
 >
-  <h3>🤖 AI Recommendation</h3>
+    <div
+  style={{
+    background: darkMode ? "#172554" : "#eff6ff",
+    padding: "18px",
+    borderRadius: "12px",
+    marginBottom: "20px",
+    border: "1px solid #3b82f6",
+  }}
+>
+  <h3>🚀 About Sphere Treasury AI+</h3>
 
-       <p>
+  <p>
+    Sphere Treasury AI+ is an intelligent treasury management application built
+    on the Sphere SDK. It helps organizations manage budgets, analyze treasury
+    health, monitor transactions, and receive AI-powered financial insights.
+  </p>
+
+  <ul style={{ marginTop: "10px", lineHeight: "1.8" }}>
+    <li>✅ AI Budget Recommendations</li>
+    <li>✅ Treasury Analytics Dashboard</li>
+    <li>✅ Budget Management</li>
+    <li>✅ Transaction History</li>
+    <li>✅ Sphere SDK Integration</li>
+    <li>✅ Sphere Testnet Ready</li>
+  </ul>
+</div>
+         <p>
        {budgets.reduce((t, b) => t + b.amount, 0) > 1000
        ? "Treasury is growing well. Consider diversifying funds."
        : "Treasury is small. Focus on increasing the budget."}
@@ -122,11 +206,15 @@ export default function TreasuryDashboard() {
       </p>
 
       <p>
-        <strong>AI Status:</strong>{" "}
-       {budgets.reduce((t, b) => t + b.amount, 0) > 1000
-       ? "✅ AI Analysis Complete"
-       : "⏳ Waiting for more treasury data"}
-      </p>
+  {budgets.length < 3
+    ? "Treasury is still growing. Add more budget categories for better diversification."
+    : Math.max(...budgets.map((b) => b.amount)) >
+      budgets.reduce((t, b) => t + b.amount, 0) * 0.6
+    ? "One budget holds most of the treasury. Consider redistributing funds to reduce risk."
+    : budgets.reduce((t, b) => t + b.amount, 0) > 1000
+    ? "Treasury is healthy and diversified. Continue monitoring allocations."
+    : "Treasury balance is improving. Consider increasing reserves."}
+</p>
         <div style={{ marginTop: "20px" }}>
         <input
           type="text"
@@ -158,7 +246,7 @@ export default function TreasuryDashboard() {
     background: darkMode ? "#1e293b" : "#f3f4f6",
     padding: "18px",
     borderRadius: "14px",
-    minWidth: "180px",
+    minWidth: "220px",
     boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
     transition: "0.3s",
     boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
@@ -175,7 +263,7 @@ export default function TreasuryDashboard() {
   style={{
     background: darkMode ? "#1e293b" : "#f3f4f6",
     padding: "15px",
-    borderRadius: "10px",
+    borderRadius: "12px",
     minWidth: "180px",
     boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
     transition: "0.3s",
@@ -184,7 +272,9 @@ export default function TreasuryDashboard() {
 >
   <h4>🏆 Largest Budget</h4>
   <p>
-    {Math.max(...budgets.map((b) => b.amount))} TEST
+    {budgets.length
+    ? Math.max(...budgets.map((b) => b.amount))
+    : 0} TEST
   </p>
 </div>
 
@@ -201,7 +291,9 @@ export default function TreasuryDashboard() {
 >
   <h4>📉 Smallest Budget</h4>
   <p>
-    {Math.min(...budgets.map((b) => b.amount))} TEST
+    {budgets.length
+    ? Math.min(...budgets.map((b) => b.amount))
+    : 0} TEST
   </p>
 </div>
 
@@ -215,9 +307,12 @@ export default function TreasuryDashboard() {
 >
   <h4>📈 Average Budget</h4>
   <p>
-    {Math.round(
-      budgets.reduce((t, b) => t + b.amount, 0) / budgets.length
-    )} TEST
+     {budgets.length
+    ? Math.round(
+        budgets.reduce((t, b) => t + b.amount, 0) /
+        budgets.length
+      )
+    : 0} TEST
   </p>
 </div>
   <div
@@ -237,17 +332,18 @@ export default function TreasuryDashboard() {
 </div>
       </div>
              <input 
-           type="text"
-           placeholder="🔍 Search Budget"
-           value={search}
-           onChange={(e) => setSearch(e.target.value)}
-           style={{
-            padding: "8px",
-            marginTop: "10px",
-            width: "250px",
-            display: "block",
+              type="text"
+              placeholder="🔍 Search Budget"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{
+              padding: "8px",
+              marginTop: "10px",
+              width: "250px",
+              display: "block",
            }}
-           /><button
+           />
+           <button
              onClick={() => setSortHighToLow(!sortHighToLow)}
              style={{
               marginTop: "10px",
@@ -261,7 +357,7 @@ export default function TreasuryDashboard() {
              >
              {sortHighToLow ? "⬇ Highest First" : "⬆ Lowest First"}
              </button>
-           <h3>Current Budgets</h3>
+           <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>Current Budgets</h3>
            <div
   style={{
     width: "100%",
@@ -275,8 +371,20 @@ export default function TreasuryDashboard() {
     borderRadius: "14px",
   }}
 >
-  <h3>📊 Budget Overview</h3>
+  <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>📊 Budget Overview</h3>
 
+  {budgets.length === 0 ? (
+  <p
+    style={{
+      textAlign: "center",
+      marginTop: "100px",
+      color: "#94a3b8",
+      fontSize: "16px",
+    }}
+  >
+    📭 No budgets available. Add your first budget to view analytics.
+  </p>
+) : (
   <ResponsiveContainer width="100%" height="85%">
     <BarChart data={budgets}>
       <XAxis dataKey="name" />
@@ -285,6 +393,7 @@ export default function TreasuryDashboard() {
       <Bar dataKey="amount" fill="#22c55e" />
     </BarChart>
   </ResponsiveContainer>
+)}
 </div>
               {editingIndex !== null && (
   <div
@@ -295,7 +404,7 @@ export default function TreasuryDashboard() {
       borderRadius: "8px",
     }}
   >
-    <h3>✏ Edit Budget</h3>
+    <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>✏ Edit Budget</h3>
 
     <input
       type="text"
@@ -347,17 +456,16 @@ export default function TreasuryDashboard() {
          setEditingIndex(null);
   }}
   style={{
-    marginLeft: "10px",
-    padding: "8px 15px",
-    background: "#22c55e",
-    color: "white",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-    transition: "0.3s",
-    borderRadius: "14px",
-  }}
+  padding: "12px 22px",
+  background: "#22c55e",
+  color: "white",
+  border: "none",
+  borderRadius: "10px",
+  cursor: "pointer",
+  fontWeight: "bold",
+  boxShadow: "0 4px 12px rgba(34,197,94,0.35)",
+  transition: "0.3s ease",
+}}
 >
   💾 Save Changes
 </button>
@@ -439,7 +547,8 @@ export default function TreasuryDashboard() {
       </button>
     </div>
   ))}            
-      <h3 style={{ marginTop: "25px" }}>📜 Recent Activity</h3>
+      <h3 style={{ fontSize: "20px", marginBottom: "10px" }}
+        style={{ marginTop: "25px" }}>📜 Recent Activity</h3>
 
       {activities.length === 0 ? (
         <p>No activity yet.</p>
@@ -448,7 +557,8 @@ export default function TreasuryDashboard() {
           <p key={index}>• {activity}</p>
         ))
       )}
-        <h3 style={{ marginTop: "25px" }}>💳 Transaction History</h3>
+        <h3 style={{ fontSize: "20px", marginBottom: "10px" }}
+         style={{ marginTop: "25px" }}>💳 Transaction History</h3>
 
 {transactions.length === 0 ? (
   <p>No transactions yet.</p>
@@ -478,6 +588,27 @@ export default function TreasuryDashboard() {
 >
   <button
     onClick={() => {
+      if (!budgetName.trim()) {
+  alert("Please enter a budget name.");
+  return;
+}
+ if (!budgetName.trim()) {
+  alert("Please enter a budget name.");
+  return;
+}
+if (budgetAmount <= 0) {
+  alert("Please enter a valid budget amount.");
+  return;
+}
+if (
+  budgets.some(
+    (budget) =>
+      budget.name.toLowerCase() === budgetName.toLowerCase()
+  )
+) {
+  alert("Budget already exists.");
+  return;
+}
       setBudgets([
         ...budgets,
         {
@@ -503,7 +634,7 @@ export default function TreasuryDashboard() {
       setBudgetAmount(0);
     }}
     style={{
-      padding: "10px 20px",
+      padding: "10px 18px",
       background: "#22c55e",
       color: "white",
       border: "none",
@@ -516,15 +647,16 @@ export default function TreasuryDashboard() {
     <button
   onClick={exportCSV}
   style={{
-    padding: "10px 20px",
-    background: "#2563eb",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    fontWeight: "bold",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
-  }}
+  padding: "10px 18px",
+  background: "#2563eb",
+  color: "white",
+  border: "none",
+  borderRadius: "10px",
+  cursor: "pointer",
+  fontWeight: "bold",
+  boxShadow: "0 4px 12px rgba(37,99,235,0.35)",
+  transition: "0.3s ease",
+}}
 >
   📄 Export Treasury CSV
 </button>
