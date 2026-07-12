@@ -18,7 +18,12 @@ export default function TreasuryDashboard() {
   const [budgetAmount, setBudgetAmount] = useState(0);
   const [activities, setActivities] = useState<string[]>([]);
   const [transactions, setTransactions] = useState<
-        { action: string; amount: number }[]
+         {
+           action: string;
+           amount: number;
+           time: string;
+           status: string;
+         }[]
         >([]);
   const [search, setSearch] = useState("");
   const [sortHighToLow, setSortHighToLow] = useState(false);
@@ -29,7 +34,7 @@ export default function TreasuryDashboard() {
 });
    const [darkMode, setDarkMode] = useState(true);
    const exportCSV = () => {
-  const csv =
+   const csv =
     "Budget,Amount\n" +
     budgets
       .map((b) => `${b.name},${b.amount}`)
@@ -184,11 +189,34 @@ export default function TreasuryDashboard() {
     <li>✅ Sphere Testnet Ready</li>
   </ul>
 </div>
-         <p>
-       {budgets.reduce((t, b) => t + b.amount, 0) > 1000
-       ? "Treasury is growing well. Consider diversifying funds."
-       : "Treasury is small. Focus on increasing the budget."}
-       </p>
+         <p
+  style={{
+    background: darkMode ? "#1e293b" : "#f8fafc",
+    padding: "15px",
+    borderRadius: "10px",
+    border: "1px solid #14b8a6",
+    marginTop: "15px",
+    lineHeight: "1.7",
+  }}
+>
+  <strong>🤖 AI Treasury Assistant</strong>
+  <br />
+
+  {budgets.length === 0
+    ? "No treasury data found. Add your first budget to receive AI insights."
+
+    : budgets.reduce((t, b) => t + b.amount, 0) < 500
+    ? "Your treasury is still small. Focus on increasing reserves before expanding spending."
+
+    : Math.max(...budgets.map((b) => b.amount)) >
+      budgets.reduce((t, b) => t + b.amount, 0) * 0.6
+    ? "Most of your treasury is concentrated in one budget. Consider redistributing 10–20% into other categories to reduce financial risk."
+
+    : budgets.length < 3
+    ? "Create additional budget categories to improve diversification and financial planning."
+
+    : "Your treasury is healthy and well diversified. Continue monitoring spending and maintain an emergency reserve for future growth."}
+</p>
        </div>
 
        <p>
@@ -450,9 +478,11 @@ export default function TreasuryDashboard() {
   {
     action: `Edited ${editingBudget.name}`,
     amount: editingBudget.amount,
+    status: "Success",
+    time: new Date().toLocaleTimeString(),
   },
   ...transactions,
-]); 
+]);
          setEditingIndex(null);
   }}
   style={{
@@ -501,12 +531,14 @@ export default function TreasuryDashboard() {
           ]);
 
           setTransactions([
-            {
-              action: `Deleted ${budget.name}`,
-              amount: budget.amount,
-            },
-            ...transactions,
-          ]);
+  {
+    action: `Deleted ${budget.name}`,
+    amount: budget.amount,
+    status: "Success",
+    time: new Date().toLocaleTimeString(),
+  },
+  ...transactions,
+]);
 
           setBudgets(
             budgets.filter((_, i) => i !== index)
@@ -563,21 +595,49 @@ export default function TreasuryDashboard() {
 {transactions.length === 0 ? (
   <p>No transactions yet.</p>
 ) : (
-  transactions.map((tx, index) => (
+ transactions.map((tx, index) => (
+  <div
+    key={index}
+    style={{
+      background: darkMode ? "#1e293b" : "#f8fafc",
+      border: "1px solid #14b8a6",
+      borderRadius: "10px",
+      padding: "14px",
+      marginTop: "12px",
+      boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+    }}
+  >
     <div
-      key={index}
       style={{
-        border: "1px solid #555",
-        padding: "8px",
-        borderRadius: "6px",
-        marginTop: "8px",
+        display: "flex",
+        justifyContent: "space-between",
       }}
     >
       <strong>{tx.action}</strong>
 
-      <p>{tx.amount} TEST</p>
+      <span
+        style={{
+          color: "#22c55e",
+          fontWeight: "bold",
+        }}
+      >
+        {tx.status}
+      </span>
     </div>
-  ))
+
+    <p style={{ marginTop: "8px" }}>
+      💰 {tx.amount} TEST
+    </p>
+
+    <small
+      style={{
+        color: "#94a3b8",
+      }}
+    >
+      🕒 {tx.time}
+    </small>
+  </div>
+))
 )}
   <div
   style={{
@@ -622,13 +682,15 @@ if (
         ...activities,
       ]);
 
-      setTransactions([
-        {
-          action: `Added ${budgetName}`,
-          amount: budgetAmount,
-        },
-        ...transactions,
-      ]);
+     setTransactions([
+  {
+    action: `Added ${budgetName}`,
+    amount: budgetAmount,
+    status: "Success",
+    time: new Date().toLocaleTimeString(),
+  },
+  ...transactions,
+]);
 
       setBudgetName("");
       setBudgetAmount(0);

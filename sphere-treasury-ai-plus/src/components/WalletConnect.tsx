@@ -4,14 +4,17 @@ import { initializeSphere } from "../services/sphere";
 export default function WalletConnect() {
   const [connected, setConnected] = useState(false);
   const [address, setAddress] = useState("");
-
+  const [network, setNetwork] = useState("");
+  const [initializedAt, setInitializedAt] = useState("");
   async function connectWallet() {
     const result = await initializeSphere();
 
-    if (result) {
-      setConnected(true);
-      setAddress((result.sphere as any)._identity.directAddress);
-    }
+    if (result?.info) {
+      setConnected(result.info.initialized);
+      setAddress(result.info.walletAddress);
+      setNetwork(result.info.network);
+      setInitializedAt(result.info.initializedAt);
+}
   }
 
   return (
@@ -41,12 +44,19 @@ export default function WalletConnect() {
       <p>
         <strong>Wallet Status:</strong>{" "}
         {connected ? "✅ Connected" : "❌ Not Connected"}
+        <p>
+        <strong>Network:</strong> {network}
+      </p>
+
+      <p>
+        <strong>Initialized:</strong> {initializedAt}
+      </p>
       </p>
 
       {connected && (
         <>
           <p>
-            <strong>Wallet Address:</strong>
+            <strong>Sphere Wallet Address:</strong>
           </p>
 
           <p

@@ -1,75 +1,168 @@
-# React + TypeScript + Vite
+# 🚀 Sphere Treasury AI+
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered Treasury Management application built with **React**, **Vite**, and the **Unicity Sphere SDK**.
 
-Currently, two official plugins are available:
+Sphere Treasury AI+ helps organizations manage budgets, monitor treasury health, visualize financial analytics, and receive intelligent treasury recommendations through an easy-to-use dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+# ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔗 Sphere SDK Integration
+- 👛 Sphere Wallet Connection
+- 💰 Treasury Dashboard
+- 📊 Budget Analytics
+- 📈 Interactive Charts
+- 🤖 AI Treasury Assistant
+- 🔍 Budget Search
+- ↕ Budget Sorting
+- 📝 Budget CRUD (Create, Read, Update, Delete)
+- 📜 Transaction History
+- 🌙 Dark Mode
+- 📱 Responsive UI
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# 🛠 Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React
+- TypeScript
+- Vite
+- Sphere SDK
+- Recharts
+- CSS (Inline Styling)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 📷 Application Features
+
+## Dashboard
+
+- Treasury Balance
+- Treasury Health
+- Largest Budget
+- Smallest Budget
+- Average Budget
+- Total Budgets
+
+---
+
+## AI Treasury Assistant
+
+The built-in AI assistant analyzes:
+
+- Treasury Size
+- Budget Diversification
+- Budget Concentration
+- Reserve Health
+- Spending Distribution
+
+and generates intelligent treasury recommendations.
+
+---
+
+## Sphere SDK Integration
+
+This project integrates the **Unicity Sphere SDK** to provide:
+
+- Sphere Wallet Connection
+- Identity Initialization
+- Wallet Address Display
+- Network Information
+- SDK Status
+- Initialization Timestamp
+
+---
+
+# 📊 Budget Analytics
+
+The dashboard includes:
+
+- Budget Overview Bar Chart
+- Largest Budget
+- Smallest Budget
+- Average Budget
+- Treasury Health Indicator
+
+---
+
+# 📜 Transaction History
+
+Every treasury operation records:
+
+- Action
+- Amount
+- Timestamp
+- Status
+
+Supported actions include:
+
+- Budget Creation
+- Budget Editing
+- Budget Deletion
+
+---
+
+# 📂 Project Structure
 
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+src/
+ ├── components/
+ │     ├── TreasuryDashboard.tsx
+ │     ├── WalletConnect.tsx
+ │
+ ├── services/
+ │     ├── sphere.ts
+ │     ├── providers.ts
+ │
+ ├── App.tsx
+ ├── main.tsx
 ```
+
+---
+
+# ⚙ Installation
+
+Clone the repository
+
+```bash
+git clone <repository-url>
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run development server
+
+```bash
+npm run dev
+```
+
+---
+
+# 🚀 Future Improvements
+
+- AI Risk Analysis
+- Treasury Forecasting
+- Multi Wallet Support
+- Treasury Reports (PDF)
+- CSV Export
+- Real-time Sphere Events
+- Treasury Notifications
+
+---
+
+# 👨‍💻 Author
+
+**Sanjay Sharma**
+
+Built for the **Unicity Sphere Builder Program** using the **Sphere SDK**.
+
+---
+
+# 📄 License
+
+MIT License
