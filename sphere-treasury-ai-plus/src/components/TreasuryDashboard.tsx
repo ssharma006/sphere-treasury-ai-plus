@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { sphere } from "../sphere";
 import {
   BarChart,
   Bar,
@@ -10,10 +9,13 @@ import {
 } from "recharts";
 
 export default function TreasuryDashboard() {
-  const sdkStatus = sphere ? "🟢 Connected" : "🔴 Disconnected";
-  const [budgets, setBudgets] = useState([
-    
-  ]);
+  const sdkStatus = "🟢 Connected";
+  const [budgets, setBudgets] = useState<
+  {
+    name: string;
+    amount: number;
+  }[]
+>([]);
   const [budgetName, setBudgetName] = useState("");
   const [budgetAmount, setBudgetAmount] = useState(0);
   const [activities, setActivities] = useState<string[]>([]);
@@ -148,8 +150,7 @@ export default function TreasuryDashboard() {
       color: darkMode ? "#000" : "#fff",
       boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
       transition: "0.3s",
-      borderRadius: "14px",
-    }}
+      }}
   >
     {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
   </button>
@@ -158,7 +159,6 @@ export default function TreasuryDashboard() {
   style={{
     background: darkMode ? "#1e293b" : "#f3f4f6",
     padding: "15px",
-    borderRadius: "10px",
     marginTop: "20px",
     marginBottom: "20px",
   }}
@@ -277,10 +277,8 @@ export default function TreasuryDashboard() {
     minWidth: "220px",
     boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
     transition: "0.3s",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-    transition: "0.3s",
-    borderRadius: "14px",
-  }}
+        
+    }}
 >
     <h4>💰 Total Treasury</h4>
     <p>
@@ -295,7 +293,7 @@ export default function TreasuryDashboard() {
     minWidth: "180px",
     boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
     transition: "0.3s",
-    borderRadius: "14px",
+    
   }}
 >
   <h4>🏆 Largest Budget</h4>
@@ -310,7 +308,6 @@ export default function TreasuryDashboard() {
   style={{
     background: darkMode ? "#1e293b" : "#f3f4f6",
     padding: "15px",
-    borderRadius: "10px",
     minWidth: "180px",
     boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
     transition: "0.3s",
@@ -347,7 +344,6 @@ export default function TreasuryDashboard() {
     style={{
       background: darkMode ? "#1e293b" : "#f3f4f6",
       padding: "15px",
-      borderRadius: "10px",
       minWidth: "180px",
       boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
       transition: "0.3s",
@@ -391,14 +387,22 @@ export default function TreasuryDashboard() {
     width: "100%",
     height: 300,
     background: darkMode ? "#1e293b" : "#f3f4f6",
-    borderRadius: "10px",
     padding: "15px",
     marginBottom: "20px",
     boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
     transition: "0.3s",
     borderRadius: "14px",
   }}
+> <h3
+  style={{
+    fontSize: "20px",
+    marginTop: "25px",
+    marginBottom: "10px",
+  }}
 >
+  💳 Transaction History
+</h3>
+
   <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>📊 Budget Overview</h3>
 
   {budgets.length === 0 ? (
@@ -579,9 +583,15 @@ export default function TreasuryDashboard() {
       </button>
     </div>
   ))}            
-      <h3 style={{ fontSize: "20px", marginBottom: "10px" }}
-        style={{ marginTop: "25px" }}>📜 Recent Activity</h3>
-
+     <h3
+  style={{
+    fontSize: "20px",
+    marginTop: "25px",
+    marginBottom: "10px",
+  }}
+>
+  📜 Recent Activity
+</h3>
       {activities.length === 0 ? (
         <p>No activity yet.</p>
       ) : (
@@ -589,13 +599,8 @@ export default function TreasuryDashboard() {
           <p key={index}>• {activity}</p>
         ))
       )}
-        <h3 style={{ fontSize: "20px", marginBottom: "10px" }}
-         style={{ marginTop: "25px" }}>💳 Transaction History</h3>
-
-{transactions.length === 0 ? (
-  <p>No transactions yet.</p>
-) : (
- transactions.map((tx, index) => (
+       (
+      {transactions.map((tx, index) => (
   <div
     key={index}
     style={{
@@ -637,8 +642,7 @@ export default function TreasuryDashboard() {
       🕒 {tx.time}
     </small>
   </div>
-))
-)}
+))}
   <div
   style={{
     marginTop: "20px",
