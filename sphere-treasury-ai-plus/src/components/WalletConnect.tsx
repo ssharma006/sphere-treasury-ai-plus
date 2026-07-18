@@ -40,19 +40,18 @@ export default function WalletConnect() {
       >
         🔗 Sphere Wallet
       </h2>
-
       <p>
-        <strong>Wallet Status:</strong>{" "}
-        {connected ? "✅ Connected" : "❌ Not Connected"}
-        <p>
-        <strong>Network:</strong> {network}
-      </p>
+  <strong>Wallet Status:</strong>{" "}
+  {connected ? "✅ Connected" : "❌ Not Connected"}
+</p>
 
-      <p>
-        <strong>Initialized:</strong> {initializedAt}
-      </p>
-      </p>
+<p>
+  <strong>Network:</strong> {network}
+</p>
 
+<p>
+  <strong>Initialized:</strong> {initializedAt}
+</p>
       {connected && (
         <>
           <p>
