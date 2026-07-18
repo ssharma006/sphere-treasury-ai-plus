@@ -27,6 +27,7 @@ export default function TreasuryDashboard() {
            status: string;
          }[]
         >([]);
+  const [aiMessage, setAiMessage] = useState("");         
   const [search, setSearch] = useState("");
   const [sortHighToLow, setSortHighToLow] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -198,7 +199,49 @@ export default function TreasuryDashboard() {
     marginTop: "15px",
     lineHeight: "1.7",
   }}
+><div
+  style={{
+    background: "linear-gradient(135deg,#0f172a,#1d4ed8)",
+    color: "white",
+    padding: "24px",
+    borderRadius: "18px",
+    marginTop: "25px",
+    marginBottom: "25px",
+    border: "1px solid #14F195",
+    boxShadow: "0 8px 20px rgba(20,241,149,0.18)",
+  }}
 >
+  <h3
+    style={{
+      marginTop: 0,
+      color: "#14F195",
+      fontSize: "26px",
+    }}
+  >
+    🤖 AI Treasury Assistant
+  </h3>
+
+  <p
+    style={{
+      fontSize: "17px",
+      lineHeight: "1.8",
+    }}
+  >
+    {aiMessage || "Add budgets to receive intelligent treasury recommendations."}
+  </p>
+
+  <div
+    style={{
+      marginTop: "18px",
+      padding: "12px",
+      borderRadius: "10px",
+      background: "rgba(255,255,255,0.08)",
+    }}
+  >
+    💡 AI analyzes your treasury allocation, balance health, diversification,
+    and growth opportunities in real time.
+  </div>
+</div>
   <strong>🤖 AI Treasury Assistant</strong>
   <br />
 
@@ -225,7 +268,18 @@ export default function TreasuryDashboard() {
        </p>
 
       <p>
+        
         <strong>Total Budgets:</strong> {budgets.length}
+        <p
+  style={{
+    fontSize: "30px",
+    fontWeight: "bold",
+    color: "#14F195",
+    marginTop: "12px",
+  }}
+>
+  {/* Keep the existing value here */}
+</p>
       </p>
 
       <p>
@@ -282,25 +336,100 @@ export default function TreasuryDashboard() {
 >
     <h4>💰 Total Treasury</h4>
     <p>
+      <p
+  style={{
+    fontSize: "30px",
+    fontWeight: "bold",
+    color: "#14F195",
+    marginTop: "12px",
+  }}
+>
+  {/* Keep the existing value here */}
+</p>
       {budgets.reduce((t, b) => t + b.amount, 0)} TEST
     </p>
   </div>
             <div
   style={{
-    background: darkMode ? "#1e293b" : "#f3f4f6",
-    padding: "15px",
-    borderRadius: "12px",
-    minWidth: "180px",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-    transition: "0.3s",
-    
+    background: "linear-gradient(135deg,#0f172a,#1e293b)",
+  color: "white",
+  padding: "22px",
+  borderRadius: "18px",
+  border: "1px solid #14F195",
+  boxShadow: "0 8px 20px rgba(20,241,149,0.18)",
+  transition: "0.3s",
+  textAlign: "center",
   }}
 >
   <h4>🏆 Largest Budget</h4>
   <p>
+    <p
+  style={{
+    fontSize: "30px",
+    fontWeight: "bold",
+    color: "#14F195",
+    marginTop: "12px",
+  }}
+>
+  {/* Keep the existing value here */}
+</p>
     {budgets.length
     ? Math.max(...budgets.map((b) => b.amount))
     : 0} TEST
+  </p>
+</div>
+<div
+  style={{
+    background: darkMode ? "#1e293b" : "#f3f4f6",
+    padding: "15px",
+    minWidth: "180px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    transition: "0.3s",
+    borderRadius: "14px",
+  }}
+>
+  <h4>📉 Smallest Budget</h4>
+  <p>
+    <p
+  style={{
+    fontSize: "30px",
+    fontWeight: "bold",
+    color: "#14F195",
+    marginTop: "12px",
+  }}
+>
+  {/* Keep the existing value here */}
+</p>
+    {budgets.length
+    ? Math.min(...budgets.map((b) => b.amount))
+    : 0} TEST
+  </p>
+</div>
+<div
+  style={{
+    background: darkMode ? "#1e293b" : "#f3f4f6",
+    padding: "15px",
+    borderRadius: "10px",
+    minWidth: "180px",
+  }}
+>
+  <h4>📈 Average Budget</h4>
+
+  <p
+    style={{
+      fontSize: "30px",
+      fontWeight: "bold",
+      color: "#14F195",
+      marginTop: "12px",
+    }}
+  >
+    {budgets.length
+      ? Math.round(
+          budgets.reduce((t, b) => t + b.amount, 0) /
+            budgets.length
+        )
+      : 0}{" "}
+    TEST
   </p>
 </div>
 
@@ -314,45 +443,19 @@ export default function TreasuryDashboard() {
     borderRadius: "14px",
   }}
 >
-  <h4>📉 Smallest Budget</h4>
-  <p>
-    {budgets.length
-    ? Math.min(...budgets.map((b) => b.amount))
-    : 0} TEST
-  </p>
-</div>
+  <h4>📦 Total Budgets</h4>
 
-<div
-  style={{
-    background: darkMode ? "#1e293b" : "#f3f4f6",
-    padding: "15px",
-    borderRadius: "10px",
-    minWidth: "180px",
-  }}
->
-  <h4>📈 Average Budget</h4>
-  <p>
-     {budgets.length
-    ? Math.round(
-        budgets.reduce((t, b) => t + b.amount, 0) /
-        budgets.length
-      )
-    : 0} TEST
-  </p>
-</div>
-  <div
+  <p
     style={{
-      background: darkMode ? "#1e293b" : "#f3f4f6",
-      padding: "15px",
-      minWidth: "180px",
-      boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-      transition: "0.3s",
-      borderRadius: "14px",
+      fontSize: "30px",
+      fontWeight: "bold",
+      color: "#14F195",
+      marginTop: "12px",
     }}
   >
-    <h4>📦 Total Budgets</h4>
-    <p>{budgets.length}</p>
-  </div>
+    {budgets.length}
+  </p>
+</div>
 </div>
       </div>
              <input 
@@ -599,7 +702,7 @@ export default function TreasuryDashboard() {
           <p key={index}>• {activity}</p>
         ))
       )}
-       (
+       
       {transactions.map((tx, index) => (
   <div
     key={index}
@@ -685,7 +788,15 @@ if (
         `Added "${budgetName}" (${budgetAmount} TEST)`,
         ...activities,
       ]);
+      const total = budgets.reduce((t, b) => t + b.amount, 0) + budgetAmount;
 
+if (total < 500) {
+  setAiMessage("⚠ Treasury balance is low. Consider increasing reserves.");
+} else if (total > 1000) {
+  setAiMessage("🚀 Treasury is healthy. Consider investing surplus funds for growth.");
+} else {
+  setAiMessage("✅ Treasury is balanced and performing well.");
+}
      setTransactions([
   {
     action: `Added ${budgetName}`,
